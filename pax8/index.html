@@ -424,18 +424,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_changelog">Changelog</a>
-<ul class="sectlevel3">
-<li><a href="#_2021_03_26">2021-03-26</a></li>
-<li><a href="#_2021_03_22">2021-03-22</a></li>
-<li><a href="#_2021_03_01">2021-03-01</a></li>
-</ul>
-</li>
+<li><a href="#_changelog">Changelog</a></li>
 <li><a href="#introduction">Introduction</a></li>
-<li><a href="#_api_conventions">API Conventions</a></li>
 <li><a href="#authentication">Authentication</a></li>
-<li><a href="#_rate_limiting">Rate Limiting</a></li>
-<li><a href="#_root_request">Root request</a></li>
 <li><a href="#_submit_a_job">Submit a job</a>
 <ul class="sectlevel2">
 <li><a href="#_request_parameters">Request parameters:</a></li>
@@ -491,16 +482,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_code_examples">Code Examples</a>
 <ul class="sectlevel2">
-<li><a href="#_root_example">Root Example</a></li>
-<li><a href="#_submit_example">Submit Example</a></li>
-<li><a href="#_submit_example_version_1_1">Submit Example (version 1.1)</a></li>
-<li><a href="#_complete_upload_example">Complete Upload Example</a></li>
-<li><a href="#_job_list_example">Job List Example</a></li>
-<li><a href="#_printer_job_list_example">Printer Job List Example</a></li>
-<li><a href="#_job_example">Job Example</a></li>
-<li><a href="#_delete_example">Delete Example</a></li>
-<li><a href="#_printer_list_example">Printer List Example</a></li>
-<li><a href="#_printer_info_example">Printer Info Example</a></li>
+<li><a href="#_register_reseller_example">Register Reseller Example</a></li>
+<li><a href="#_usage_example">Usage Example</a></li>
 </ul>
 </li>
 </ul>
@@ -510,192 +493,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_changelog">Changelog</h2>
 <div class="sectionbody">
-<h4 id="_2021_07_30" class="discrete">2021-07-30</h4>
+<h4 id="_2021_09_07" class="discrete">2021-09-07</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Exposed the printer status (wheather it is online or not) when querying printers.
-See <a href="#_printer_list_example">Printer List Example</a> and <a href="#_printer_info_example">Printer Info Example</a></p>
-</li>
-</ul>
-</div>
-<div class="sect3">
-<h4 id="_2021_03_26">2021-03-26</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Better documented the use for the PDL parameter, see <a href="#_submit_a_job">Submit a job</a></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_2021_03_22">2021-03-22</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Added an option in the request body of the <a href="#_new_submit_method">New Submit method</a>, to allow the user to specify if a job should be scaled.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_2021_03_01">2021-03-01</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Added an alternative version of the <code>/submit</code> end-point, that allows users to change print job properties like color and duplex that are defined in the request body.<br>
-See <a href="#_new_submit_method">New Submit method</a> for more information.</p>
-</li>
-<li>
-<p>Added new changelog section to the API documentation.</p>
+<p>Created the initial Printix Marketplace Service API documentation project</p>
 </li>
 </ul>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
-</div>
 <div class="sect1">
 <h2 id="introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Printix Cloud Print API is intended for use by applications that
-wish to push print jobs in PDF or native format into a Printix queue.</p>
+<p>The Printix Marketplace Service API is intended for use by external marketplaces that wish to offer Printix services that are to be setup automatically in the Printix Partner Portal.</p>
 </div>
 <div class="paragraph">
-<p>Creating and printing a document is a multistage process, consisting of:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Fetching a list of printers. (See <a href="#_list_printers">List Printers</a>)</p>
-</li>
-<li>
-<p>Selecting a printer. (See <a href="#_get_printer_properties">Get printer properties</a>)</p>
-</li>
-<li>
-<p>Creating a job for that printer. (See <a href="#_submit_a_job">Submit a job</a>)</p>
-</li>
-<li>
-<p>Making a PUT request to the cloud storage links returned in the previous step&#8217;s response, including the
-document to print in the request body. (See <a href="#_upload_a_file">Upload a file</a>)</p>
-</li>
-<li>
-<p>Using the uploadCompleted link present in the response from step 3 to inform Printix that
-the document has been submitted and uploaded and is ready to be printed. (See <a href="#_complete_upload">Complete Upload</a>).</p>
-</li>
-</ol>
+<p>This spec describe the Printix API endpoints exposed for the cloud marketplace integration between Pax8 and Printix. Once implemented Pax8 will be able to interact with Printix to create and manage resellers, tenants and their subscriptions.</p>
 </div>
 <div class="paragraph">
-<p>Each of these four steps is detailed in their respective sections of this document.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_api_conventions">API Conventions</h2>
-<div class="sectionbody">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Please be aware that use of the API may be throttled if an application makes too many requests in a short amount of time:
-the current threshold is set to 100 request per minute per user, which we estimate would allow a user to submit an average of 20 jobs each minute.<br>
-See the <a href="#_rate_limiting">Rate Limiting</a> section for more information.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Terminology: The word "Resource" is used to refer to a single entity (printer, job etc) in it&#8217;s raw form.
-The word "Document" is used to describe a complete response, so a resource or multiple resources and whatever container elements
-they may be returned in.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>This API makes use of the <a href="https://tools.ietf.org/html/draft-kelly-json-hal-08">HAL document format</a>
-As such, it is intended to be discoverable by only having knowledge of the API entrypoint (see <a href="#_root_request">root request</a>).
-All successful responses contains links that allow exploring the rest of the API.
-As such, consumers of the API are encouraged to not try to manually construct URLs, but instead make use of the ones returned by
-previous API responses.
-An example response looks like:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-json" data-lang="json">{
-  "_links" : {
-    "self" : {
-      "href" : [the url of the returned document] ,
-      "templated" : true
-    },
-    "multiples": [{
-      "href" : [a single link ] ,
-      "templated" : true
-      },{
-      "href" : [another single link] ,
-      "templated" : true
-      }
-    ]
-  },
-  ...object properties in json
-}</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-It&#8217;s worth noting that, according to the spec, a link relation may be represented as either an object (if there&#8217;s only one), or an array (if there are more).<br>
-This may represent a challenge.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Resource lists (jobs, printers) are returned in a paginated container format, with information about
-the current page (page number, page size, total elements and total page count) and links to next and
-previous page if these exist.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code>{
-  "_links" : {
-    "self" : {
-      "href" : [the url of the returned document],
-      "templated" : true
-    },
-    "next" : {
-       "href" : [link  to next page of element],
-    }
-  },
-  "success" : true,
-  "message" : "OK",
-  "printers" : [ ],
-  "page" : {
-    "size" : 100,
-    "totalElements" : 101,
-    "totalPages" : 2,
-    "number" : 1
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>See the individual resource descriptions below for a more detailed view of resource structures.</p>
+<p>The service interacting with Printix must first acquire a set of service tokens. This is done using the
+<a href="https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/">Client Credentials flow of oauth 2</a> as described below.</p>
 </div>
 </div>
 </div>
@@ -703,18 +523,58 @@ previous page if these exist.</p>
 <h2 id="authentication">Authentication</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The service interacting with Printix must first acquire a set of service tokens. This is done using the
-<a href="https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/">Client Credentials flow of oauth 2</a></p>
-</div>
-<div class="paragraph">
 <p>The service is provided, out of band, with a credential set consisting of a client ID and a client secret. These are posted
 to the Printix token endpoint.</p>
 </div>
 <div class="paragraph">
-<p>The client ID and secret necessary to authenticate with the API can be obtained through the Printix Administrator dashboard, please refer to the <a href="https://manuals.printix.net/administrator/topic/software-page#api">Printix Administrator manual</a> for instruction on how to generate a set of API credentials.</p>
+<p>CREATE CLIENT CREDENTIALS REQUEST:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/partners/{servicePartnerId}/oauthclients'  -X POST \
+    -H 'Content-Type: application/x-www-form-urlencoded'\
+    -H 'Authorization: Bearer {authAccessToken}'\
+    -d 'client_name={username}&amp;assignee-email={email}'</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>A client ID and secret can be used to get an access token, by sending a POST request to the Printix token endpoint:</p>
+<p>The client credentials should only be created once per user and be safely stored on the client.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>servicePartnerId</code> is the Pax8 partner UUID from the Printix Partner Portal</p>
+</li>
+<li>
+<p><code>authAccessToken</code> is the access token created by the login session of the Partner Portal user, which (in Chrome) can be found by right click -&#8594; Inspect, and then go to Application -&#8594; Local Storage -&#8594; <a href="https://partner.printix.net" class="bare">https://partner.printix.net</a> and then copy the SHA value of the "printix.AuthAccessToken"</p>
+</li>
+<li>
+<p><code>username</code> is the registered name of the Pax8 partner user that is logged into the Partner Portal.</p>
+</li>
+<li>
+<p><code>email</code> is the Pax8 partner users registered email address.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>CLIENT CREDENTIALS RESPONSE EXAMPLE:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">Content-Type: application/json;charset=UTF-8
+
+{
+  "name":"Pax8 partner username",
+  "secret":"RU8j1T2z3zoUuyku0M5o1Gww66F2I57UVTJAvov5UKa91krS",
+  "clientId":"a20da946-5aa1-4cc7-b9ed-6aa08f4a093f",
+  "ownerId":"009439aa-ae1c-47d2-b0ab-e51372fbb554",
+  "ownerType":"PARTNER",
+  "userId":"93825a80-443b-4ed4-aadc-86fb5598fe8c"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>OAUTH TOKEN REQUEST:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -724,7 +584,7 @@ to the Printix token endpoint.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In case of success the response will be</p>
+<p>OAUTH TOKEN RESPONSE EXAMPLE:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -751,54 +611,11 @@ to the Printix token endpoint.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In case of success the response will be</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">Content-Type: application/json;charset=UTF-8
-
-{
-  "access_token": "5a8c4ec4-ff70-4f4c-b088-29a8cae38062",
-  "refresh_token": "e6f05338-9d27-466b-afa8-0ce72945da7d",
-  "expires_in": 3599
-}</code></pre>
-</div>
+<p>The response will then be similar to the OAUTH TOKEN RESPONSE EXAMPLE from above</p>
 </div>
 <div class="paragraph">
 <p>Store the refresh token returned in the response, and use that for the next token refresh. The refresh token
 will not be updated on every request, but you still make sure, you&#8217;re using the latest.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_rate_limiting">Rate Limiting</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Rate limiting is implemented using a <a href="https://en.wikipedia.org/wiki/Token_bucket">Token Bucket Algorithm</a>:
-in short, the server allocates a "bucket" containing a certain amount of tokens (100 in our case), and every time a
-request is made to the API a token is consumed. The tokens are refilled at a fixed time interval (60 seconds), and if a
-request comes in but the token bucket is empty, the incoming request is throttled.</p>
-</div>
-<div class="paragraph">
-<p>Upon a successful request, the response will contain the header <code>X-Rate-Limit-Remaining</code> which indicates the remaining number of tokens for a given time interval.<br>
-If on the other hand, a request is throttled and returns HTTP status code 429, the response will contain the custom header
-<code>X-Rate-Limit-Retry-After-Seconds</code> indicating how many seconds to wait for before retrying.</p>
-</div>
-<div class="paragraph">
-<p>Throttling applies equally to all end-points, with the same rate of 100 requests per minute per user.
-Given these values, users should expact to be able to process around 20 print jobs per minute.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_root_request">Root request</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The API entry point is located at <code><a href="https://api.printix.net/cloudprint" class="bare">https://api.printix.net/cloudprint</a></code><br>
-This end-point takes no request parameters, and returns a list of links to accessible tenants.</p>
-</div>
-<div class="paragraph">
-<p>Code Example <a href="#_root_example">Root Example</a></p>
 </div>
 </div>
 </div>
@@ -904,7 +721,7 @@ To use non-standard document dimensions outside of the supported paper sizes, fo
 <div class="sect2">
 <h3 id="_request_parameters">Request parameters:</h3>
 <div class="paragraph">
-<p>Unresolved directive in index.adoc - include::generated-snippets/submit/request-parameters.adoc[]</p>
+<p>Unresolved directive in index.adoc - include::generated-snippets/register-reseller/request-parameters.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
@@ -930,7 +747,7 @@ To use non-standard document dimensions outside of the supported paper sizes, fo
 </div>
 <div class="paragraph">
 <p>Below is a breakdown of the fields returned in the response.
-Unresolved directive in index.adoc - include::generated-snippets/submit/response-fields.adoc[]</p>
+Unresolved directive in index.adoc - include::generated-snippets/register-reseller/response-fields.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
@@ -941,7 +758,7 @@ A 500 error is thrown if other errors occur.
 In both cases, the response body contains an error description and an internal error ID for troubleshooting</p>
 </div>
 <div class="paragraph">
-<p>Code example: <a href="#_submit_example">Submit Example</a></p>
+<p>Code example: <a href="#Submit Example">[Submit Example]</a></p>
 </div>
 </div>
 </div>
@@ -999,7 +816,7 @@ In order to use this new version of the <code>/submit</code> end-point, simply f
 </li>
 <li>
 <p>Change the body of an existing request, or create a new request body; In both cases,<br>
-the request body should have the same fields and formating shown in <a href="#_submit_example_version_1_1">Submit Example (version 1.1)</a>.<br></p>
+the request body should have the same fields and formating shown in <a href="#Submit Example (version 1.1)">[Submit Example (version 1.1)]</a>.<br></p>
 </li>
 </ul>
 </div>
@@ -1118,7 +935,7 @@ A 500 error is thrown if other errors occur.
 In both cases, the response body contains an error description and an internal error ID for troubleshooting</p>
 </div>
 <div class="paragraph">
-<p>Code example: <a href="#_submit_example_version_1_1">Submit Example (version 1.1)</a></p>
+<p>Code example: <a href="#Submit Example (version 1.1)">[Submit Example (version 1.1)]</a></p>
 </div>
 </div>
 </div>
@@ -1152,7 +969,7 @@ custom header in the PUT request. This header varies depending on what storage p
 </div>
 <div class="paragraph">
 <p>Below is an example of how to upload a document to Azure blob storage using CURL: in this example we
-assume that we need to print a file called test.pdf located in the current working directory, and we use the url and headers returned in the <a href="#_submit_example">Submit Example</a></p>
+assume that we need to print a file called test.pdf located in the current working directory, and we use the url and headers returned in the <a href="#Submit Example">[Submit Example]</a></p>
 </div>
 <div class="paragraph">
 <p>1) We submit the document, setting the <code>title</code> parameter to a title of our choice.</p>
@@ -1230,7 +1047,7 @@ A 500 error is thrown if other errors occur.
 In both cases, the response body contains an error description and an internal error ID for troubleshooting.</p>
 </div>
 <div class="paragraph">
-<p>Code Example: <a href="#_complete_upload_example">Complete Upload Example</a></p>
+<p>Code Example: <a href="#Complete Upload Example">[Complete Upload Example]</a></p>
 </div>
 </div>
 </div>
@@ -1337,10 +1154,10 @@ A 500 error is thrown if other errors occur.
 In both cases, the response body contains an error description and an internal error ID for troubleshooting.</p>
 </div>
 <div class="paragraph">
-<p>General Code Example: <a href="#_job_list_example">Job List Example</a></p>
+<p>General Code Example: <a href="#Job List Example">[Job List Example]</a></p>
 </div>
 <div class="paragraph">
-<p>Code Example with a printer specified: <a href="#_printer_job_list_example">Printer Job List Example</a></p>
+<p>Code Example with a printer specified: <a href="#Printer Job List Example">[Printer Job List Example]</a></p>
 </div>
 </div>
 </div>
@@ -1359,7 +1176,7 @@ This end-point takes no parameters, it returns a boolean success indicator and i
 A 500 error is thrown if other errors occur.</p>
 </div>
 <div class="paragraph">
-<p>Code Example: <a href="#_job_example">Job Example</a></p>
+<p>Code Example: <a href="#Job Example">[Job Example]</a></p>
 </div>
 </div>
 </div>
@@ -1380,7 +1197,7 @@ A 500 error is thrown if other errors occur.</p>
 A 500 error is thrown if other errors occur.</p>
 </div>
 <div class="paragraph">
-<p>Code Example: <a href="#_delete_example">Delete Example</a></p>
+<p>Code Example: <a href="#Delete Example">[Delete Example]</a></p>
 </div>
 </div>
 </div>
@@ -1405,7 +1222,7 @@ A 500 error is thrown if other errors occur.
 In both cases, the response body contains an error description and an internal error ID for troubleshooting.</p>
 </div>
 <div class="paragraph">
-<p>Code Example: <a href="#_printer_info_example">Printer Info Example</a></p>
+<p>Code Example: <a href="#Printer Info Example">[Printer Info Example]</a></p>
 </div>
 </div>
 </div>
@@ -1440,7 +1257,7 @@ Unresolved directive in index.adoc - include::generated-snippets/printerList/res
 The response body also contains an internal error ID for troubleshooting</p>
 </div>
 <div class="paragraph">
-<p>Code Example: <a href="#_printer_list_example">Printer List Example</a></p>
+<p>Code Example: <a href="#Printer List Example">[Printer List Example]</a></p>
 </div>
 </div>
 </div>
@@ -1449,12 +1266,12 @@ The response body also contains an internal error ID for troubleshooting</p>
 <h2 id="_code_examples">Code Examples</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_root_example">Root Example</h3>
+<h3 id="_register_reseller_example">Register Reseller Example</h3>
 <div class="sect3">
 <h4 id="_request">Request:</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/root/http-request.adoc[]</code></pre>
+<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/register-reseller/http-request.adoc[]</code></pre>
 </div>
 </div>
 </div>
@@ -1462,18 +1279,18 @@ The response body also contains an internal error ID for troubleshooting</p>
 <h4 id="_response_4">Response:</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/root/http-response.adoc[]</code></pre>
+<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/register-reseller/http-response.adoc[]</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_submit_example">Submit Example</h3>
+<h3 id="_usage_example">Usage Example</h3>
 <div class="sect3">
 <h4 id="_request_2">Request:</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/submit/http-request.adoc[]</code></pre>
+<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/usage/http-request.adoc[]</code></pre>
 </div>
 </div>
 </div>
@@ -1481,159 +1298,7 @@ The response body also contains an internal error ID for troubleshooting</p>
 <h4 id="_response_5">Response:</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/submit/http-response.adoc[]</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_submit_example_version_1_1">Submit Example (version 1.1)</h3>
-<div class="sect3">
-<h4 id="_request_3">Request:</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/submit_new/http-request.adoc[]</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_response_6">Response:</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/submit_new/http-response.adoc[]</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_complete_upload_example">Complete Upload Example</h3>
-<div class="sect3">
-<h4 id="_request_4">Request:</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/Complete Upload/http-request.adoc[]</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_response_7">Response:</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/Complete Upload/http-response.adoc[]</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_job_list_example">Job List Example</h3>
-<div class="sect3">
-<h4 id="_request_5">Request:</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/jobList/http-request.adoc[]</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_response_8">Response:</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/jobList/http-response.adoc[]</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_printer_job_list_example">Printer Job List Example</h3>
-<div class="sect3">
-<h4 id="_request_6">Request:</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/printerJobList/http-request.adoc[]</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_response_9">Response:</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/printerJobList/http-response.adoc[]</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_job_example">Job Example</h3>
-<div class="sect3">
-<h4 id="_request_7">Request:</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/job/http-request.adoc[]</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_response_10">Response:</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/job/http-response.adoc[]</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_delete_example">Delete Example</h3>
-<div class="sect3">
-<h4 id="_request_8">Request:</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/delete/http-request.adoc[]</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_response_11">Response:</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/delete/http-response.adoc[]</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_printer_list_example">Printer List Example</h3>
-<div class="sect3">
-<h4 id="_request_9">Request:</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/printerList/http-request.adoc[]</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_response_12">Response:</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/printerList/http-response.adoc[]</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_printer_info_example">Printer Info Example</h3>
-<div class="sect3">
-<h4 id="_request_10">Request:</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/printerInfo/http-request.adoc[]</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_response_13">Response:</h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/printerInfo/http-response.adoc[]</code></pre>
+<pre class="highlight"><code>Unresolved directive in index.adoc - include::generated-snippets/usage/http-response.adoc[]</code></pre>
 </div>
 </div>
 </div>
@@ -1643,7 +1308,7 @@ The response body also contains an internal error ID for troubleshooting</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-09-07 13:26:14 CEST
+Last updated 2021-09-10 12:41:09 CEST
 </div>
 </div>
 </body>
