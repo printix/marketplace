@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Pax8 API</title>
+<title>Untitled</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -416,168 +416,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
-<body class="book toc2 toc-left">
+<body class="book">
 <div id="header">
-<h1>Pax8 API</h1>
-<div id="toc" class="toc2">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_changelog">Changelog</a></li>
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#authentication">Authentication</a></li>
-<li><a href="#_reseller_registration">Reseller Registration</a>
-<ul class="sectlevel2">
-<li><a href="#_reseller_registration_request">Reseller Registration Request:</a></li>
-<li><a href="#_response">Response:</a></li>
-<li><a href="#_error_handling">Error Handling</a></li>
-</ul>
-</li>
-</ul>
-</div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_changelog">Changelog</h2>
+<div id="preamble">
 <div class="sectionbody">
-<h4 id="_2021_09_07" class="discrete">2021-09-07</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Created the initial Printix Marketplace Service API documentation project</p>
-</li>
-</ul>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="introduction">Introduction</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The Printix Marketplace Service API is intended for use by external marketplaces that wish to offer Printix services that are to be setup automatically in the Printix Partner Portal.</p>
-</div>
-<div class="paragraph">
-<p>This spec describe the Printix API endpoints exposed for the cloud marketplace integration between Pax8 and Printix. Once implemented Pax8 will be able to interact with Printix to create and manage resellers, tenants and their subscriptions.</p>
-</div>
-<div class="paragraph">
-<p>The service interacting with Printix must first acquire a set of service tokens. This is done using the
-<a href="https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/">Client Credentials flow of oauth 2</a> as described below.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="authentication">Authentication</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The service is provided, out of band, with a credential set consisting of a client ID and a client secret. These are posted
-to the Printix token endpoint.</p>
-</div>
-<div class="paragraph">
-<p>CREATE CLIENT CREDENTIALS REQUEST:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/partners/{servicePartnerId}/oauthclients'  -X POST \
-    -H 'Content-Type: application/x-www-form-urlencoded'\
-    -H 'Authorization: Bearer {authAccessToken}'\
-    -d 'client_name={username}&amp;assignee-email={email}'</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The client credentials should only be created once per user and be safely stored on the client.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>servicePartnerId</code> is the Pax8 partner UUID from the Printix Partner Portal</p>
-</li>
-<li>
-<p><code>authAccessToken</code> is the access token created by the login session of the Partner Portal user, which (in Chrome) can be found by right click -&#8594; Inspect, and then go to Application -&#8594; Local Storage -&#8594; <a href="https://partner.printix.net" class="bare">https://partner.printix.net</a> and then copy the SHA value of the "printix.AuthAccessToken"</p>
-</li>
-<li>
-<p><code>username</code> is the registered name of the Pax8 partner user that is logged into the Partner Portal.</p>
-</li>
-<li>
-<p><code>email</code> is the Pax8 partner users registered email address.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>CLIENT CREDENTIALS RESPONSE EXAMPLE:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">Content-Type: application/json;charset=UTF-8
-
-{
-  "name":"Pax8 partner username",
-  "secret":"RU8j1T2z3zoUuyku0M5o1Gww66F2I57UVTJAvov5UKa91krS",
-  "clientId":"a20da946-5aa1-4cc7-b9ed-6aa08f4a093f",
-  "ownerId":"009439aa-ae1c-47d2-b0ab-e51372fbb554",
-  "ownerType":"PARTNER",
-  "userId":"93825a80-443b-4ed4-aadc-86fb5598fe8c"
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>OAUTH TOKEN REQUEST:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://auth.printix.net/oauth/token'  -X POST \
-    -H 'Content-Type: application/x-www-form-urlencoded'\
-    -d 'grant_type=client_credentials&amp;client_id={clientId}&amp;client_secret={clientSecret}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>OAUTH TOKEN RESPONSE EXAMPLE:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">Content-Type: application/json;charset=UTF-8
-
-{
-  "access_token": "5a8c4ec4-ff70-4f4c-b088-29a8cae38062",
-  "refresh_token": "e6f05338-9d27-466b-afa8-0ce72945da7d",
-  "expires_in": 3599
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Each access token is valid for one hour, after which it will need to be refreshed by getting a new one.</p>
-</div>
-<div class="paragraph">
-<p>To Refresh a token, send a POST request to the Printix token endpoint:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">curl 'https://auth.printix.net/oauth/token'  -X POST \
-    -H 'Content-Type: application/x-www-form-urlencoded'\
-    -d 'grant_type=refresh_token&amp;client_id={clientId}&amp;refresh_token={refreshToken}'</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The response will then be similar to the OAUTH TOKEN RESPONSE EXAMPLE from above</p>
-</div>
-<div class="paragraph">
-<p>Store the refresh token returned in the response, and use that for the next token refresh. The refresh token
-will not be updated on every request, but you still make sure, you&#8217;re using the latest.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_reseller_registration">Reseller Registration</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The <code>/reseller/registration</code> end-point is used to register a reseller under the Pax8 partner in the Printix Partner Portal.</p>
-</div>
-<div class="paragraph">
-<p>The reseller is created from the Pax8 distributorId path parameter and the request body payload</p>
-</div>
-<div class="sect2">
-<h3 id="_reseller_registration_request">Reseller Registration Request:</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/1d7599b1-925d-4b26-9d26-46f027ca1936/reseller/registration' -i -X POST \
@@ -599,47 +444,11 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_response">Response:</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight nowrap"><code>{
-  "partnerId" : null,
-  "version" : 0,
-  "name" : "CompanyNameTest2",
-  "address" : "",
-  "address2" : null,
-  "city" : "",
-  "stateOrProvince" : null,
-  "postalCode" : "",
-  "countryCode" : "",
-  "phone" : "",
-  "email" : "",
-  "parentId" : "1d7599b1-925d-4b26-9d26-46f027ca1936",
-  "corporateIdentificationNumber" : null,
-  "hideCreateTenant" : null,
-  "enableOnDevice" : null
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_error_handling">Error Handling</h3>
-<div class="paragraph">
-<p>This end-point returns a false boolean success indicator in all failure scenarios, as well as a 404 error if the supplied printer specified in the request could not be found.
-A 500 error is thrown if other errors occur.
-In both cases, the response body contains an error description and an internal error ID for troubleshooting</p>
-</div>
-<div class="paragraph">
-<p>Code example: <a href="#_reseller_registration">Reseller Registration</a></p>
-</div>
-</div>
-</div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-09-10 15:11:32 CEST
+Last updated 2021-09-10 15:13:10 CEST
 </div>
 </div>
 </body>
