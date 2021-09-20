@@ -586,9 +586,9 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 <h3 id="_reseller_registration_request">Reseller Registration Request:</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/4c661633-6932-4f15-9fcf-8fa683bb5c7f/reseller/registration' -i -X POST \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/7c8ccf59-ccf7-405e-b4ae-79d862e19d68/reseller/registration' -i -X POST \
     -H 'Content-Type: application/json' \
-    -H 'Authorization: Bearer 86e366e4-c8f8-469b-8cc1-3d715d9d64a3' \
+    -H 'Authorization: Bearer de77f12e-fb70-4b88-9ce1-7d95c62f12ee' \
     -H 'Accept: application/json' \
     -d '{
   "companyName" : "Reseller Company Inc.",
@@ -610,7 +610,7 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
-  "partnerId" : "a1ecc998-406f-49e1-be55-3d630890d112",
+  "partnerId" : "1334f046-1d53-4f50-a1d6-165955d9a0fe",
   "version" : 0,
   "name" : "Reseller Company Inc.",
   "address" : "Reseller Address",
@@ -621,7 +621,7 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
   "countryCode" : "US",
   "phone" : "+1 234 5678",
   "email" : "email@address.com",
-  "parentId" : "4c661633-6932-4f15-9fcf-8fa683bb5c7f",
+  "parentId" : "7c8ccf59-ccf7-405e-b4ae-79d862e19d68",
   "corporateIdentificationNumber" : null,
   "hideCreateTenant" : null,
   "enableOnDevice" : null
@@ -644,9 +644,9 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 <h3 id="_get_usage_request">Get Usage Request:</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/24d583f1-ea09-4b35-9e9a-830bdb8799f4/usage' -i -X GET \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/48f99504-6063-49f9-9159-655881929b99/usage' -i -X GET \
     -H 'Content-Type: application/json' \
-    -H 'Authorization: Bearer bfd67094-ce50-4999-aa39-dfe523cd18ae' \
+    -H 'Authorization: Bearer f43df174-c1f1-4ae9-8a0f-41c58f906cbd' \
     -H 'Accept: application/json'</code></pre>
 </div>
 </div>
@@ -662,17 +662,17 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
       "tenantName" : "Tenant Company Inc.",
       "tenantDomain" : "tenant-company.printix.net",
       "billingPeriods" : [ {
-        "tenantId" : "52971dc4-3955-4c20-85ae-1bdd270d903a",
-        "periodStart" : "2021-08-01T07:30:21.699700Z",
-        "periodEnd" : "2021-09-01T07:30:21.716905Z",
+        "tenantId" : "f451bc38-41da-4409-8c84-21c5d4120b9a",
+        "periodStart" : "2021-08-01T11:25:36.463243Z",
+        "periodEnd" : "2021-09-01T11:25:36.468397Z",
         "activeUsers" : 17,
         "trial" : false,
         "open" : false,
         "invoiced" : false
       }, {
-        "tenantId" : "52971dc4-3955-4c20-85ae-1bdd270d903a",
-        "periodStart" : "2021-09-01T07:30:21.717202Z",
-        "periodEnd" : "2021-10-01T07:30:21.717308Z",
+        "tenantId" : "f451bc38-41da-4409-8c84-21c5d4120b9a",
+        "periodStart" : "2021-09-01T11:25:36.469649Z",
+        "periodEnd" : "2021-10-01T11:25:36.469828Z",
         "activeUsers" : 10,
         "trial" : false,
         "open" : true,
@@ -702,12 +702,15 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 <div class="paragraph">
 <p>500 Internal Server Error is returned by unhandled exceptions which is possible even though they are not supposed to occur</p>
 </div>
+<div class="paragraph">
+<p>The different error response formats are documented here: <a href="https://printix.atlassian.net/wiki/spaces/ARCH/pages/2239397895/Printix+Error+Responses" class="bare">https://printix.atlassian.net/wiki/spaces/ARCH/pages/2239397895/Printix+Error+Responses</a></p>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-09-20 09:25:43 CEST
+Last updated 2021-09-20 13:23:34 CEST
 </div>
 </div>
 </body>
