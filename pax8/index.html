@@ -437,9 +437,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_get_usage_request">Get Usage Request:</a></li>
 <li><a href="#_get_usage_response">Get Usage Response:</a></li>
-<li><a href="#_error_handling">Error Handling</a></li>
 </ul>
 </li>
+<li><a href="#_error_handling">Error Handling</a></li>
 </ul>
 </div>
 </div>
@@ -586,9 +586,9 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 <h3 id="_reseller_registration_request">Reseller Registration Request:</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/8ad31f60-ee28-49ac-96d3-4ecb40120916/reseller/registration' -i -X POST \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/4c661633-6932-4f15-9fcf-8fa683bb5c7f/reseller/registration' -i -X POST \
     -H 'Content-Type: application/json' \
-    -H 'Authorization: Bearer c20d37a6-7fc0-4264-bda1-9ba74dce12dc' \
+    -H 'Authorization: Bearer 86e366e4-c8f8-469b-8cc1-3d715d9d64a3' \
     -H 'Accept: application/json' \
     -d '{
   "companyName" : "Reseller Company Inc.",
@@ -610,7 +610,7 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
-  "partnerId" : "7403d269-57d8-4581-bf0c-216a4a85619e",
+  "partnerId" : "a1ecc998-406f-49e1-be55-3d630890d112",
   "version" : 0,
   "name" : "Reseller Company Inc.",
   "address" : "Reseller Address",
@@ -621,7 +621,7 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
   "countryCode" : "US",
   "phone" : "+1 234 5678",
   "email" : "email@address.com",
-  "parentId" : "8ad31f60-ee28-49ac-96d3-4ecb40120916",
+  "parentId" : "4c661633-6932-4f15-9fcf-8fa683bb5c7f",
   "corporateIdentificationNumber" : null,
   "hideCreateTenant" : null,
   "enableOnDevice" : null
@@ -644,9 +644,9 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 <h3 id="_get_usage_request">Get Usage Request:</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/16502fd5-5517-4e28-bc1a-86aceb0fb844/usage' -i -X GET \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/24d583f1-ea09-4b35-9e9a-830bdb8799f4/usage' -i -X GET \
     -H 'Content-Type: application/json' \
-    -H 'Authorization: Bearer 4624fc1a-da5d-473b-b42f-fb3723cbc9a0' \
+    -H 'Authorization: Bearer bfd67094-ce50-4999-aa39-dfe523cd18ae' \
     -H 'Accept: application/json'</code></pre>
 </div>
 </div>
@@ -662,17 +662,17 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
       "tenantName" : "Tenant Company Inc.",
       "tenantDomain" : "tenant-company.printix.net",
       "billingPeriods" : [ {
-        "tenantId" : "2459ba60-3b37-4fe8-abb3-ae33912ea8e6",
-        "periodStart" : "2021-08-01T12:34:06.659402Z",
-        "periodEnd" : "2021-09-01T12:34:06.681707Z",
+        "tenantId" : "52971dc4-3955-4c20-85ae-1bdd270d903a",
+        "periodStart" : "2021-08-01T07:30:21.699700Z",
+        "periodEnd" : "2021-09-01T07:30:21.716905Z",
         "activeUsers" : 17,
         "trial" : false,
         "open" : false,
         "invoiced" : false
       }, {
-        "tenantId" : "2459ba60-3b37-4fe8-abb3-ae33912ea8e6",
-        "periodStart" : "2021-09-01T12:34:06.697973Z",
-        "periodEnd" : "2021-10-01T12:34:06.699290Z",
+        "tenantId" : "52971dc4-3955-4c20-85ae-1bdd270d903a",
+        "periodStart" : "2021-09-01T07:30:21.717202Z",
+        "periodEnd" : "2021-10-01T07:30:21.717308Z",
         "activeUsers" : 10,
         "trial" : false,
         "open" : true,
@@ -685,21 +685,29 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_error_handling">Error Handling</h3>
-<div class="paragraph">
-<p>400 Bad Request is returned with a descriptive error message when a request contain invalid parameters
-401 Unauthorized is returned by all endpoint when the request has an invalid Bearer token.
-404 Not Found is returned when sending requests to non-existing endpoints.
-500 Internal Server Error is returned by unhandled exceptions which is possible even though they are not supposed to occur</p>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_error_handling">Error Handling</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>400 Bad Request is returned with a descriptive error message when a request contain invalid parameters</p>
+</div>
+<div class="paragraph">
+<p>401 Unauthorized is returned by all endpoint when the request has an invalid Bearer token.</p>
+</div>
+<div class="paragraph">
+<p>404 Not Found is returned when sending requests to non-existing endpoints.</p>
+</div>
+<div class="paragraph">
+<p>500 Internal Server Error is returned by unhandled exceptions which is possible even though they are not supposed to occur</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-09-17 14:18:52 CEST
+Last updated 2021-09-20 09:25:43 CEST
 </div>
 </div>
 </body>
