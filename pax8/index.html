@@ -586,9 +586,9 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 <h3 id="_reseller_registration_request">Reseller Registration Request:</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/f86686ea-5845-497c-a7e5-941f02e99abc/reseller/registration' -i -X POST \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/4afd7f5f-2135-4386-8eb6-b7a94093be3f/reseller/registration' -i -X POST \
     -H 'Content-Type: application/json' \
-    -H 'Authorization: Bearer 8db4e5d2-a644-49b6-8e44-b8bcaf06101f' \
+    -H 'Authorization: Bearer 3f24ad4f-07fe-4aba-95fe-84cf54a2f51c' \
     -H 'Accept: application/json' \
     -d '{
   "companyName" : "Reseller Company Inc.",
@@ -610,7 +610,7 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
-  "partnerId" : "34c4d1cb-7d3f-41ea-a3ae-79e2c7e45170",
+  "partnerId" : "9ac1cb8b-f96f-4a0e-a21c-f5bfe3340c4e",
   "version" : 0,
   "name" : "Reseller Company Inc.",
   "address" : "Reseller Address",
@@ -621,7 +621,7 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
   "countryCode" : "US",
   "phone" : "+1 234 5678",
   "email" : "email@address.com",
-  "parentId" : "f86686ea-5845-497c-a7e5-941f02e99abc",
+  "parentId" : "4afd7f5f-2135-4386-8eb6-b7a94093be3f",
   "corporateIdentificationNumber" : null,
   "hideCreateTenant" : null,
   "enableOnDevice" : null
@@ -644,9 +644,9 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 <h3 id="_get_usage_request">Get Usage Request:</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/0c1c85da-afc8-4a6a-8967-a9a89796f16f/usage' -i -X GET \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/cb45b1a0-1058-4386-a64c-2f9d3fab3c66/usage' -i -X GET \
     -H 'Content-Type: application/json' \
-    -H 'Authorization: Bearer dc3e9a0e-1914-4677-b580-499a823cf343' \
+    -H 'Authorization: Bearer 851f993a-1f9e-4deb-bae7-c156d175b333' \
     -H 'Accept: application/json'</code></pre>
 </div>
 </div>
@@ -657,24 +657,24 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 <div class="content">
 <pre class="highlight nowrap"><code>{
   "resellers" : [ {
-    "resellerId" : "91842c4c-3c24-4237-abf3-ba6181234a30",
+    "resellerId" : "fbce765e-471a-4536-aadd-916fa6f58073",
     "name" : "Reseller Company Inc.",
     "tenants" : [ {
-      "tenantId" : "026597cc-0be0-43be-a03a-f301e3f85ed3",
+      "tenantId" : "8d19aece-773f-42d5-9c81-2ffb95de8487",
       "tenantName" : "Tenant Company Inc.",
       "tenantDomain" : "tenant-company.printix.net",
       "billingPeriods" : [ {
-        "tenantId" : "026597cc-0be0-43be-a03a-f301e3f85ed3",
-        "periodStart" : "2021-11-01T11:59:40.428647Z",
-        "periodEnd" : "2021-12-01T11:59:40.432502Z",
+        "tenantId" : "8d19aece-773f-42d5-9c81-2ffb95de8487",
+        "periodStart" : "2021-11-01T12:12:06.893546Z",
+        "periodEnd" : "2021-12-01T12:12:06.896045Z",
         "activeUsers" : 17,
         "trial" : false,
         "open" : false,
         "invoiced" : false
       }, {
-        "tenantId" : "026597cc-0be0-43be-a03a-f301e3f85ed3",
-        "periodStart" : "2021-12-01T11:59:40.432767Z",
-        "periodEnd" : "2022-01-01T11:59:40.432873Z",
+        "tenantId" : "8d19aece-773f-42d5-9c81-2ffb95de8487",
+        "periodStart" : "2021-12-01T12:12:06.896349Z",
+        "periodEnd" : "2022-01-01T12:12:06.896452Z",
         "activeUsers" : 10,
         "trial" : false,
         "open" : true,
