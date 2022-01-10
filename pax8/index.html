@@ -586,9 +586,9 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 <h3 id="_reseller_registration_request">Reseller Registration Request:</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/4afd7f5f-2135-4386-8eb6-b7a94093be3f/reseller/registration' -i -X POST \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/48a7dfc2-a63b-42bc-9e75-c081ea5c4fec/reseller/registration' -i -X POST \
     -H 'Content-Type: application/json' \
-    -H 'Authorization: Bearer 3f24ad4f-07fe-4aba-95fe-84cf54a2f51c' \
+    -H 'Authorization: Bearer 5469706b-ba93-411f-8164-6f90d8ff0432' \
     -H 'Accept: application/json' \
     -d '{
   "companyName" : "Reseller Company Inc.",
@@ -610,7 +610,7 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 <div class="listingblock">
 <div class="content">
 <pre class="highlight nowrap"><code>{
-  "partnerId" : "9ac1cb8b-f96f-4a0e-a21c-f5bfe3340c4e",
+  "partnerId" : "b214cb26-f855-4c31-9670-8d934f2f4d25",
   "version" : 0,
   "name" : "Reseller Company Inc.",
   "address" : "Reseller Address",
@@ -621,7 +621,7 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
   "countryCode" : "US",
   "phone" : "+1 234 5678",
   "email" : "email@address.com",
-  "parentId" : "4afd7f5f-2135-4386-8eb6-b7a94093be3f",
+  "parentId" : "48a7dfc2-a63b-42bc-9e75-c081ea5c4fec",
   "corporateIdentificationNumber" : null,
   "hideCreateTenant" : null,
   "enableOnDevice" : null
@@ -644,9 +644,9 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 <h3 id="_get_usage_request">Get Usage Request:</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/cb45b1a0-1058-4386-a64c-2f9d3fab3c66/usage' -i -X GET \
+<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'https://api.printix.net/marketplace/v1/pax8/partners/27134491-43b6-4789-8b0c-fb8fd97c9fe6/usage' -i -X GET \
     -H 'Content-Type: application/json' \
-    -H 'Authorization: Bearer 851f993a-1f9e-4deb-bae7-c156d175b333' \
+    -H 'Authorization: Bearer a4d8bdea-9b67-4a48-b9ad-9532c4c4947b' \
     -H 'Accept: application/json'</code></pre>
 </div>
 </div>
@@ -657,24 +657,24 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 <div class="content">
 <pre class="highlight nowrap"><code>{
   "resellers" : [ {
-    "resellerId" : "fbce765e-471a-4536-aadd-916fa6f58073",
+    "resellerId" : "2dbf89b2-0f4c-474d-acb0-2ba677ab22ea",
     "name" : "Reseller Company Inc.",
     "tenants" : [ {
-      "tenantId" : "8d19aece-773f-42d5-9c81-2ffb95de8487",
+      "tenantId" : "31ec02c5-1b44-42dd-8e95-d3cffe0c9f95",
       "tenantName" : "Tenant Company Inc.",
       "tenantDomain" : "tenant-company.printix.net",
       "billingPeriods" : [ {
-        "tenantId" : "8d19aece-773f-42d5-9c81-2ffb95de8487",
-        "periodStart" : "2021-11-01T12:12:06.893546Z",
-        "periodEnd" : "2021-12-01T12:12:06.896045Z",
+        "tenantId" : "31ec02c5-1b44-42dd-8e95-d3cffe0c9f95",
+        "periodStart" : "2021-12-01T10:36:07.776097Z",
+        "periodEnd" : "2022-01-01T10:36:07.778566Z",
         "activeUsers" : 17,
         "trial" : false,
         "open" : false,
         "invoiced" : false
       }, {
-        "tenantId" : "8d19aece-773f-42d5-9c81-2ffb95de8487",
-        "periodStart" : "2021-12-01T12:12:06.896349Z",
-        "periodEnd" : "2022-01-01T12:12:06.896452Z",
+        "tenantId" : "31ec02c5-1b44-42dd-8e95-d3cffe0c9f95",
+        "periodStart" : "2022-01-01T10:36:07.778715Z",
+        "periodEnd" : "2022-02-01T10:36:07.778794Z",
         "activeUsers" : 10,
         "trial" : false,
         "open" : true,
@@ -709,7 +709,7 @@ will not be updated on every request, but you still make sure, you&#8217;re usin
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-12-06 12:59:10 CET
+Last updated 2022-01-10 11:34:17 CET
 </div>
 </div>
 </body>
